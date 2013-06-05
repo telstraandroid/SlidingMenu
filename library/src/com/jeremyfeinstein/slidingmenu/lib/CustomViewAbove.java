@@ -34,7 +34,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 public class CustomViewAbove extends ViewGroup {
 
 	private static final String TAG = "CustomViewAbove";
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 
 	private static final boolean USE_CACHE = false;
 
@@ -99,7 +99,15 @@ public class CustomViewAbove extends ViewGroup {
 
 	private List<View> mIgnoredViews = new ArrayList<View>();
 
-	//	private int mScrollState = SCROLL_STATE_IDLE;
+    public int getContentOff() {
+        return mContentOff;
+    }
+
+    public void setContentOff(int mContentOff) {
+        this.mContentOff = mContentOff;
+    }
+
+    //	private int mScrollState = SCROLL_STATE_IDLE;
 
 	/**
 	 * Callback interface for responding to changing state of the selected page.
@@ -176,7 +184,7 @@ public class CustomViewAbove extends ViewGroup {
 						mViewBehind.setChildrenEnabled(true);
 						break;
 					case 1:
-						mViewBehind.setChildrenEnabled(false);
+						mViewBehind.setChildrenEnabled(mContentOff > 0);
 						break;
 					}
 				}
@@ -309,7 +317,7 @@ public class CustomViewAbove extends ViewGroup {
 		case 2:
 			return mViewBehind.getMenuLeft(mContent, page);
 		case 1:
-			return mContent.getLeft();
+			return mContent.getLeft() - mContentOff;
 		}
 		return 0;
 	}
@@ -451,7 +459,7 @@ public class CustomViewAbove extends ViewGroup {
 		int height = getDefaultSize(0, heightMeasureSpec);
 		setMeasuredDimension(width, height);
 
-		final int contentWidth = getChildMeasureSpec(widthMeasureSpec, 0, width);
+		final int contentWidth = getChildMeasureSpec(widthMeasureSpec, 0, width - mContentOff);
 		final int contentHeight = getChildMeasureSpec(heightMeasureSpec, 0, height);
 		mContent.measure(contentWidth, contentHeight);
 	}
@@ -473,7 +481,7 @@ public class CustomViewAbove extends ViewGroup {
 	protected void onLayout(boolean changed, int l, int t, int r, int b) {
 		final int width = r - l;
 		final int height = b - t;
-		mContent.layout(0, 0, width, height);
+		mContent.layout(0, 0, width - mContentOff, height);
 	}
 
 	public void setAboveOffset(int i) {
@@ -574,6 +582,9 @@ public class CustomViewAbove extends ViewGroup {
 
 	private boolean thisTouchAllowed(MotionEvent ev) {
 		int x = (int) (ev.getX() + mScrollX);
+//        if (x < 0 || x > mContent.getWidth()) {
+//            return false;
+//        }
 		if (isMenuOpen()) {
 			return mViewBehind.menuOpenTouchAllowed(mContent, mCurItem, x);
 		} else {
@@ -620,7 +631,7 @@ public class CustomViewAbove extends ViewGroup {
 
 		if (DEBUG)
 			if (action == MotionEvent.ACTION_DOWN)
-				Log.v(TAG, "Received ACTION_DOWN");
+				Log.v(TAG, "Received ACTION_DOWN" + ev.getX());
 
 		if (action == MotionEvent.ACTION_CANCEL || action == MotionEvent.ACTION_UP
 				|| (action != MotionEvent.ACTION_DOWN && mIsUnableToDrag)) {
@@ -1006,5 +1017,7 @@ public class CustomViewAbove extends ViewGroup {
 		}
 		return false;
 	}
+
+    private int mContentOff;
 
 }

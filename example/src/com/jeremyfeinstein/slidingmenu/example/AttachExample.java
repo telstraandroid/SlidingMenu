@@ -25,12 +25,17 @@ public class AttachExample extends FragmentActivity {
 		// configure the SlidingMenu
 		menu = new SlidingMenu(this);
 		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setTouchModeBehind(SlidingMenu.TOUCHMODE_MARGIN);
 		menu.setShadowWidthRes(R.dimen.shadow_width);
 		menu.setShadowDrawable(R.drawable.shadow);
 		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		menu.setFadeDegree(0.35f);
+//        menu.setBehindOffset(0);
+        menu.setBehindScrollScale(0.0f);
+        menu.setContentOff(120);
+		menu.setFadeDegree(0.1f);
 		menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
 		menu.setMenu(R.layout.menu_frame);
+
 		getSupportFragmentManager()
 		.beginTransaction()
 		.replace(R.id.menu_frame, new SampleListFragment())

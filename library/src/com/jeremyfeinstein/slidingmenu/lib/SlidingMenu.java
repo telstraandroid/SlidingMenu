@@ -1005,4 +1005,11 @@ public class SlidingMenu extends RelativeLayout {
 		}
 	}
 
+    public int getContentOff() {
+        return mViewAbove.getContentOff();
+    }
+
+    public void setContentOff(final int off) {
+        mViewAbove.setContentOff(off);
+    }
 }
