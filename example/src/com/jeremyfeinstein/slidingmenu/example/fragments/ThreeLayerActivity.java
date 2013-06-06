@@ -1,5 +1,6 @@
 package com.jeremyfeinstein.slidingmenu.example.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +15,9 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 public class ThreeLayerActivity extends FragmentActivity implements NavigationMenu.Callback, ServiceMenu.Callback {
 
     private SlidingMenu menu;
+    private ServiceMenu serviceMenu;
 
+    @SuppressLint("NewApi")
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.three_layer);
@@ -35,8 +38,9 @@ public class ThreeLayerActivity extends FragmentActivity implements NavigationMe
             menu.showMenu(false);
         }
 
-        Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.service_list);
-        getSupportFragmentManager().beginTransaction().hide(fragmentById).commit();
+        serviceMenu = (ServiceMenu) getSupportFragmentManager().findFragmentById(R.id.service_list);
+        serviceMenu.setBgColor(0);
+        getSupportFragmentManager().beginTransaction().hide(serviceMenu).commit();
 
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
             getActionBar().setHomeButtonEnabled(true);
@@ -49,18 +53,17 @@ public class ThreeLayerActivity extends FragmentActivity implements NavigationMe
     @Override
     public void onNavigationOptionSelected(int position) {
         showHiddenMenu();
-        Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.service_list);
-        if (fragmentById.isHidden()) {
+        serviceMenu.setBgColor(position);
+        if (serviceMenu.isHidden()) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.addToBackStack("service_menu")
 //                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
 //                    .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
                     .setCustomAnimations(R.anim.slide_in, R.anim.slide_out, R.anim.slide_in, R.anim.slide_out)
-                    .show(fragmentById)
+                    .show(serviceMenu)
                     .commit();
 
         }
-
     }
 
     private boolean showHiddenMenu() {

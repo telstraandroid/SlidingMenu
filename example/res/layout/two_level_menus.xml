@@ -6,7 +6,7 @@
 
     <fragment
             android:name="com.jeremyfeinstein.slidingmenu.example.fragments.NavigationMenu"
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"/>
 
     <fragment

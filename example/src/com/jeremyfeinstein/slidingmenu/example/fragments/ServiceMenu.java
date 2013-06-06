@@ -9,6 +9,13 @@ import android.widget.ArrayAdapter;
 
 public class ServiceMenu extends ListFragment implements AdapterView.OnItemClickListener {
 
+    private final static int[] COLOR_IDS = new int[]{
+            R.color.holo_blue_bright,
+            R.color.holo_green_light,
+            R.color.holo_orange_light,
+    };
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -25,5 +32,9 @@ public class ServiceMenu extends ListFragment implements AdapterView.OnItemClick
 
     public static interface Callback {
         void onServiceOptionSelected(int position);
+    }
+
+    public void setBgColor(int position) {
+        getListView().setBackgroundColor(getResources().getColor(COLOR_IDS[position % COLOR_IDS.length]));
     }
 }
