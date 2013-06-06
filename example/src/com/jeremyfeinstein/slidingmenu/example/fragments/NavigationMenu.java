@@ -15,7 +15,7 @@ public class NavigationMenu extends ListFragment implements AdapterView.OnItemCl
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListAdapter(new ArrayAdapter<String>(getActivity(), R.layout.simple_list_item_1, R.id.text1, new String[]{"Option 1", "Option 2", "Option 3"}) {
+        setListAdapter(new ArrayAdapter<String>(getActivity(), R.layout.simple_list_item_1, R.id.text1, new String[]{"Navigation 1", "Navigation 2", "Navigation 3"}) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);

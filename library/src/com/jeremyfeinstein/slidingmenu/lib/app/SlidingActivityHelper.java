@@ -42,8 +42,9 @@ public class SlidingActivityHelper {
 	 * @param savedInstanceState the saved instance state (unused)
 	 */
 	public void onCreate(Bundle savedInstanceState) {
-		mSlidingMenu = (SlidingMenu) LayoutInflater.from(mActivity).inflate(R.layout.slidingmenumain, null);
-	}
+//		mSlidingMenu = (SlidingMenu) LayoutInflater.from(mActivity).inflate(R.layout.slidingmenumain, null);
+        mSlidingMenu = new SlidingMenu(mActivity);
+    }
 
 	/**
 	 * Further SlidingMenu initialization. Should be called within the activitiy's onPostCreate()

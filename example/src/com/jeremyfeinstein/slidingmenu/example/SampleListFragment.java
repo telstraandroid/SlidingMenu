@@ -12,7 +12,18 @@ import android.widget.TextView;
 
 public class SampleListFragment extends ListFragment {
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    private String itemText = "Sample List";
+
+    public SampleListFragment(String contentFrameList) {
+        super();
+        this.itemText = contentFrameList;
+    }
+
+    public SampleListFragment() {
+        super();
+    }
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.list, null);
 	}
 
@@ -20,7 +31,7 @@ public class SampleListFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		SampleAdapter adapter = new SampleAdapter(getActivity());
 		for (int i = 0; i < 20; i++) {
-			adapter.add(new SampleItem("Sample List", android.R.drawable.ic_menu_search));
+			adapter.add(new SampleItem(itemText, android.R.drawable.ic_menu_search));
 		}
 		setListAdapter(adapter);
 	}

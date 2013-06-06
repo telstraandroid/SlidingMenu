@@ -19,7 +19,7 @@ public class AttachExample extends FragmentActivity {
 		setContentView(R.layout.content_frame);
 		getSupportFragmentManager()
 		.beginTransaction()
-		.replace(R.id.content_frame, new SampleListFragment())
+		.replace(R.id.content_frame, new SampleListFragment("Content_frame_list"))
 		.commit();
 
 		// configure the SlidingMenu
@@ -38,7 +38,7 @@ public class AttachExample extends FragmentActivity {
 
 		getSupportFragmentManager()
 		.beginTransaction()
-		.replace(R.id.menu_frame, new SampleListFragment())
+		.replace(R.id.menu_frame, new SampleListFragment("Menu Frame"))
 		.commit();
 	}
 
