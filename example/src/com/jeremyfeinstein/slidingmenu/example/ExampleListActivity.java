@@ -16,6 +16,7 @@ import com.jeremyfeinstein.slidingmenu.example.anim.CustomSlideAnimation;
 import com.jeremyfeinstein.slidingmenu.example.anim.CustomZoomAnimation;
 import com.jeremyfeinstein.slidingmenu.example.fragments.FragmentChangeActivity;
 import com.jeremyfeinstein.slidingmenu.example.fragments.ResponsiveUIActivity;
+import com.jeremyfeinstein.slidingmenu.example.fragments.ThreeLayerActivity;
 
 import java.net.URLEncoder;
 
@@ -35,7 +36,7 @@ public class ExampleListActivity extends PreferenceActivity {
 		Class<?> cls = null;
 		String title = pref.getTitle().toString();
 		if (title.equals(getString(R.string.properties))) {
-			cls = PropertiesActivity.class;	
+			cls = PropertiesActivity.class;
 		} else if (title.equals(getString(R.string.attach))) {
 			cls = AttachExample.class;
 		} else if (title.equals(getString(R.string.changing_fragments))) {
@@ -56,7 +57,9 @@ public class ExampleListActivity extends PreferenceActivity {
 			cls = CustomScaleAnimation.class;
 		} else if (title.equals(getString(R.string.anim_slide))) {
 			cls = CustomSlideAnimation.class;
-		}
+		} else if (title.equals(getString(R.string.telstra))) {
+            cls = ThreeLayerActivity.class;
+        }
 		Intent intent = new Intent(this, cls);
 		startActivity(intent);
 		return true;

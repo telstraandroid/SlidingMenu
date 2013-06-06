@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="horizontal"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <fragment
+            android:name="com.jeremyfeinstein.slidingmenu.example.fragments.NavigationMenu"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"/>
+
+    <fragment
+            android:id="@+id/service_list"
+            android:name="com.jeremyfeinstein.slidingmenu.example.fragments.ServiceMenu"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="60dp"
+            android:layout_height="match_parent"/>
+
+</FrameLayout>

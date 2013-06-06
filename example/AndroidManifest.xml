@@ -41,6 +41,8 @@
             android:name=".fragments.BirdActivity"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
         <activity android:name="com.crittercism.NotificationActivity"/>
+        <activity android:name=".fragments.NavigationMenu"/>
+        <activity android:name=".fragments.ThreeLayerActivity"/>
     </application>
 
 </manifest>

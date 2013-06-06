@@ -2,6 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <PreferenceCategory android:title="@string/general" >
+        <Preference android:title="@string/telstra"/>
         <Preference android:title="@string/properties" />
         <Preference android:title="@string/attach" />
         <Preference android:title="@string/left_and_right" />

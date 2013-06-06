@@ -582,9 +582,9 @@ public class CustomViewAbove extends ViewGroup {
 
 	private boolean thisTouchAllowed(MotionEvent ev) {
 		int x = (int) (ev.getX() + mScrollX);
-//        if (x < 0 || x > mContent.getWidth()) {
-//            return false;
-//        }
+        if (x < 0 || x > mContent.getWidth()) {
+            return false;
+        }
 		if (isMenuOpen()) {
 			return mViewBehind.menuOpenTouchAllowed(mContent, mCurItem, x);
 		} else {
