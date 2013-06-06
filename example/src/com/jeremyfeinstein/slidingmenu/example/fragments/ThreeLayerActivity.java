@@ -1,9 +1,11 @@
 package com.jeremyfeinstein.slidingmenu.example.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.MenuItem;
 import com.jeremyfeinstein.slidingmenu.example.R;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
@@ -31,22 +33,20 @@ public class ThreeLayerActivity extends FragmentActivity implements NavigationMe
             menu.showMenu(false);
         }
 
+        Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.service_list);
+        getSupportFragmentManager().beginTransaction().hide(fragmentById).commit();
 
-//        if (savedInstanceState == null) {
-            Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.service_list);
-            getSupportFragmentManager().beginTransaction().hide(fragmentById).commit();
-//        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
+            getActionBar().setHomeButtonEnabled(true);
+            getActionBar().setDisplayShowHomeEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
     }
 
     @Override
     public void onNavigationOptionSelected(int position) {
-
-        if (!menu.isMenuShowing()) {
-            menu.showMenu();
-        }
-
-
+        showHiddenMenu();
         Fragment fragmentById = getSupportFragmentManager().findFragmentById(R.id.service_list);
         if (fragmentById.isHidden()) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -60,11 +60,39 @@ public class ThreeLayerActivity extends FragmentActivity implements NavigationMe
 
     }
 
+    private boolean showHiddenMenu() {
+        if (!menu.isMenuShowing()) {
+            menu.showMenu();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (showHiddenMenu()) {
+                return true;
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     public void onServiceOptionSelected(int position) {
         if (menu.isMenuShowing()) {
             menu.showContent();
         }
-
     }
+
+    @Override
+    public void onBackPressed() {
+        if (showHiddenMenu()) {
+            return;
+        }
+        super.onBackPressed();
+    }
+
+
 }
