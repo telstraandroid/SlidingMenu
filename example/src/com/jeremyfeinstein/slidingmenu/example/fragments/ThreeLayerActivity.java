@@ -79,6 +79,9 @@ public class ThreeLayerActivity extends FragmentActivity implements NavigationMe
         if (item.getItemId() == android.R.id.home) {
             if (showHiddenMenu()) {
                 return true;
+            } else if (!serviceMenu.isHidden()) {
+                getSupportFragmentManager().popBackStack();
+                return true;
             }
 
         }
